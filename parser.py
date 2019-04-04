@@ -81,6 +81,10 @@ def parse_file( fname, edges, polygons, csystems, screen, color ):
             add_sphere(polygons,
                        float(args[0]), float(args[1]), float(args[2]),
                        float(args[3]), step_3d)
+                       
+            matrix_mult(csystems[-1], polygons)
+            draw_polygons(polygons, screen, color)
+            polygons = []
 
         elif line == 'push':
             csystems.append([r[:] for r in csystems[-1]])
@@ -94,11 +98,19 @@ def parse_file( fname, edges, polygons, csystems, screen, color ):
                       float(args[0]), float(args[1]), float(args[2]),
                       float(args[3]), float(args[4]), step_3d)
 
+            matrix_mult(csystems[-1], polygons)
+            draw_polygons(polygons, screen, color)
+            polygons = []
+
         elif line == 'box':
             #print 'BOX\t' + str(args)
             add_box(polygons,
                     float(args[0]), float(args[1]), float(args[2]),
                     float(args[3]), float(args[4]), float(args[5]))
+
+            matrix_mult(csystems[-1], polygons)
+            draw_polygons(polygons, screen, color)
+            polygons = []
 
         elif line == 'circle':
             #print 'CIRCLE\t' + str(args)
