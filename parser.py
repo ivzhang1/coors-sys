@@ -57,7 +57,7 @@ The file follows the following format:
 
 See the file script for an example of the file format
 """
-ARG_COMMANDS = [ 'box', 'sphere', 'torus', 'circle', 'bezier', 'hermite', 'line', 'scale', 'move', 'rotate', 'save', 'push', 'pop']
+ARG_COMMANDS = [ 'box', 'sphere', 'torus', 'circle', 'bezier', 'hermite', 'line', 'scale', 'move', 'rotate', 'save']
 
 def parse_file( fname, edges, polygons, csystems, screen, color ):
 
@@ -109,6 +109,7 @@ def parse_file( fname, edges, polygons, csystems, screen, color ):
                     float(args[3]), float(args[4]), float(args[5]))
 
             matrix_mult(csystems[-1], polygons)
+
             draw_polygons(polygons, screen, color)
             polygons = []
 
@@ -140,8 +141,9 @@ def parse_file( fname, edges, polygons, csystems, screen, color ):
             add_edge( edges,
                       float(args[0]), float(args[1]), float(args[2]),
                       float(args[3]), float(args[4]), float(args[5]) )
-                      
+
             matrix_mult(csystems[-1], edges)
+
             draw_lines(edges, screen, color)
             edges = []
 
@@ -186,9 +188,9 @@ def parse_file( fname, edges, polygons, csystems, screen, color ):
             polygons = []
 
         elif line == 'display' or line == 'save':
-            clear_screen(screen)
-            draw_lines(edges, screen, color)
-            draw_polygons(polygons, screen, color)
+            #clear_screen(screen)
+            #draw_lines(edges, screen, color)
+            #draw_polygons(polygons, screen, color)
 
             if line == 'display':
                 display(screen)
